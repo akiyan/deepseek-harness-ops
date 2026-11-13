@@ -1,0 +1,11 @@
+{
+  "name": "deepseek-harness-ops",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:ui": "node scripts/ui-smoke.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.65.0"
+  }
+}
