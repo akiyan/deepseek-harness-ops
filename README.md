@@ -29,6 +29,7 @@ pnpm dsh web --no-open
 - [プロンプト履歴の操作と検証記録](releases/2026-11-13.md)
 - [時雨堂追随とExa設定グループの検証記録](releases/2026-11-15.md)
 - [最新の時雨堂追随](releases/2026-11-16.md)
+- [さくらのAI Engine の追加と検証記録](releases/2026-11-19.md)
 
 資格情報、実データを含む DSH_HOME、OAuth の URL、認証コード、トークンはこのリポジトリへ保存しない。
 

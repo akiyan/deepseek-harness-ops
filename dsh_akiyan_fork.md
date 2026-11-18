@@ -66,10 +66,21 @@
 - リダイレクトを拒否し、取消・時間制限・レスポンス上限を扱う。認証失敗時の匿名への切り替えや自動再試行は行わない
 - [TonyDua の実装](https://github.com/TonyDua/dsh-web-search-exa)と[Exa 公式 MCP](https://github.com/exa-labs/exa-mcp-server)をプロトコルの参考にした
 
+### 6. さくらのAI Engine プロバイダー
+
+`packages/llm/llm-pi-ai/src/bundled-catalog.ts`
+
+- [さくらのAI Engine](https://manual.sakura.ad.jp/cloud/ai-engine/02-howto.html) を同梱ルート `sakura-ai-engine` として追加する。Settings → Models のプロバイダー選択に表示され、アカウントトークン（`<UUID>:<シークレット>`）だけで使える
+- 接続先は `https://api.ai.sakura.ad.jp/v1` の Chat Completions。エンドポイントが `max_completion_tokens` を無視するため、出力上限は `max_tokens` で送る
+- tool call 対応の6モデル（gpt-oss-120b、DeepSeek-V4.1-Flash、GLM-5.3-Flash、Kimi-K2.7-Code、Qwen3.6-35B-A3B、gemma-4-31B-it）だけを載せる。非対応モデルに `tools` を送ると 400 になるため
+- コンテキスト長・出力上限 32,000・画像入力可否は[公開仕様](https://manual.sakura.ad.jp/cloud/ai-engine/chat-models.html)に従う
+- 推論レベルは実 API で計測し、モデルごとに受け付ける値だけを出す。gpt-oss は low/medium/high、DeepSeek は off/low/high/xhigh/max、Kimi・GLM は `none` で思考が止まらないため off を出さない
+- 同梱モデルの推論レベルは、ルート共通の off 可否ではなくモデルごとの「レベル→送信値」表で持つ。Ollama Cloud の挙動は変えない
+
 ## 検証と運用
 
 - [Exa の設定](docs/exa-search.md)
 - [接続手順](docs/sign-in-with-chatgpt.md)、[上流追従とコミット形式](docs/upstream-sync.md)、[復旧](docs/recovery.md)
-- [認証・設定 UI の検証記録](releases/2026-11-12.md)、[プロンプト履歴の検証記録](releases/2026-11-13.md)
+- [認証・設定 UI の検証記録](releases/2026-11-12.md)、[プロンプト履歴の検証記録](releases/2026-11-13.md)、[さくらのAI Engine の検証記録](releases/2026-11-19.md)
 - Host / Client の回帰テスト、keyless のファイル編集再生、Chromium / WebKit の実画面検証を含む。外部 OpenAI 通信を置き換えたテストと実通信は区別する
 - 対象は Linux のローカル Web 版。Desktop 配布物、他 OS、実モデルによる一連の推論動作は検証記録の対象外
