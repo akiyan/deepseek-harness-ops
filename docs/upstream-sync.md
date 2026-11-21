@@ -9,7 +9,7 @@
 1. 未コミット変更を確認する。更新と混ぜない。
 2. origin と shiguredo を fetch し、現在の origin/akiyan の SHA を控える。
 3. 稼働中の akiyan コミットをタグなどで保持する。
-4. 作業ブランチを新しい shiguredo/shiguredo から作り、必要な独自差分だけを移植する。上流に取り込まれた機能は旧差分を退役させ、古い認証・画面を一括 cherry-pick で復活させない。現在の維持対象は入力履歴・Exa・さくらのAI Engine。[標準認証への移行](sign-in-with-chatgpt.md)も確認する。
+4. 作業ブランチを新しい shiguredo/shiguredo から作り、必要な独自差分だけを移植する。上流に取り込まれた機能は旧差分を退役させ、古い認証・画面を一括 cherry-pick で復活させない。現在の維持対象は入力履歴・Exa・さくらのAI Engine・次のメッセージの候補。[標準認証への移行](sign-in-with-chatgpt.md)も確認する。
 5. 競合を解消し、重点的な認証・モデル一覧・入力・検索の回帰テスト、組み立て済み Web 画面の検証、doc-sync、build:artifacts を実行する。build:check は最後の build:artifacts より後に実行する。実アカウント認証・有料 API 推論は無断で行わず、未実施なら記録する。
 6. 本体の独自差分を1コミットへ確定し（必要なら amend）、メッセージを次の URL のみにする。[変更情報](../dsh_akiyan_fork.md) の基準 SHA、対象パス、挙動と、releases/ の本体 SHA・実行した検証・既知の制限を更新し、ops に先に push する。本体コミットのローカル作成は先でもよいが、本体の push は ops の後にする。
 
